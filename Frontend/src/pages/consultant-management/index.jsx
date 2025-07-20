@@ -116,19 +116,20 @@ const ConsultantManagement = () => {
   };
 
   const handleDeleteConsultant = async (consultantId) => {
-    if (window.confirm('Are you sure you want to delete this consultant?')) {
+    
       try {
         setLoading(true);
         await api.deleteConsultant(consultantId);
         fetchConsultants(); // Refresh the list
-        showSuccess('Consultant deleted successfully!');
+        // Show a red alert for delete (type 'delete')
+        showSuccess('Consultant deleted successfully!', 'Consultant Deleted', 'delete');
       } catch (error) {
         console.error('Error deleting consultant:', error);
         showError(`Failed to delete consultant: ${error.message}`);
       } finally {
         setLoading(false);
       }
-    }
+    
   };
 
   const handleViewConsultant = (consultant) => {

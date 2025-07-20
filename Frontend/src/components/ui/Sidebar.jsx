@@ -140,8 +140,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                   <Icon name="User" size={20} color="white" />
                 </div>
                 <div className="flex-1 text-left">
-                  <p className="text-sm font-medium text-text-primary">{user?.name || 'Guest User'}</p>
-                  <p className="text-xs text-text-secondary">Administrator</p>
+                  <p className="text-sm font-medium text-text-primary">{user?.user?.name || 'Guest User'}</p>
+                  <p className="text-xs text-text-secondary">User</p>
                 </div>
                 <Icon 
                   name="ChevronUp" 

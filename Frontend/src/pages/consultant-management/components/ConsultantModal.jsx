@@ -73,7 +73,7 @@ const ConsultantModal = ({ isOpen, onClose, consultant, onSave, loading }) => {
 
   const getRandomConsultantAvatar = () => {
     const idx = Math.floor(Math.random() * 10) + 1;
-    return `/assets/avatars/consultants/avatar${idx}.svg`;
+    return ``;
   };
 
   const getDefaultConsultantAvatar = () => {
@@ -92,7 +92,7 @@ const ConsultantModal = ({ isOpen, onClose, consultant, onSave, loading }) => {
         subLocation: consultant.subLocation || '',
         phone: consultant.phone || '',
         experience: consultant.experience || '',
-        avatar: consultant.avatar || ''
+        avatar: consultant.avatar || getRandomConsultantAvatar()
       });
     } else {
       setFormData({
@@ -104,7 +104,7 @@ const ConsultantModal = ({ isOpen, onClose, consultant, onSave, loading }) => {
         subLocation: '',
         phone: '',
         experience: '',
-        avatar: ''
+        avatar: getRandomConsultantAvatar()
       });
     }
     setErrors({});

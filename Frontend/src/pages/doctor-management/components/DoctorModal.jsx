@@ -78,12 +78,18 @@ const DoctorModal = ({ doctor, onSave, onClose, loading }) => {
   ];
 
   const getRandomDoctorAvatar = () => {
-    const idx = Math.floor(Math.random() * 10) + 1;
-    return `/assets/avatars/doctors/avatar${idx}.svg`;
+    // Generate a random color for the SVG circle (blue shades)
+    const blueShades = [
+      '#3b82f6', '#2563eb', '#1d4ed8', '#60a5fa', '#1e40af',
+      '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#0c4a6e'
+    ];
+    const idx = Math.floor(Math.random() * blueShades.length);
+    const color = encodeURIComponent(blueShades[idx]);
+    return `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><circle cx='32' cy='32' r='32' fill='${color}'/></svg>`;
   };
 
   const getDefaultDoctorAvatar = () => {
-    // Blue circle SVG data URI
+    // Default blue circle SVG data URI
     return 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="32" fill="%233b82f6"/></svg>';
   };
 

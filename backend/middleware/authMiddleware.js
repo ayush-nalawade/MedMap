@@ -96,7 +96,7 @@ const rateLimit = (req, res, next) => {
   const ip = req.ip;
   const now = Date.now();
   const windowMs = 15 * 60 * 1000; // 15 minutes
-  const maxRequests = 100; // max 100 requests per window
+  const maxRequests = 500; // max 100 requests per window
 
   if (!rateLimiter[ip]) {
     rateLimiter[ip] = { count: 0, resetTime: now + windowMs };

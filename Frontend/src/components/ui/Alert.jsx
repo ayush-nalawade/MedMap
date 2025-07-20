@@ -39,6 +39,8 @@ const Alert = ({
       case 'success':
         return `${baseStyles} bg-green-50 border-green-400 text-green-800 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`;
       case 'error':
+      case 'failed':
+      case 'delete':
         return `${baseStyles} bg-red-50 border-red-400 text-red-800 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`;
       case 'warning':
         return `${baseStyles} bg-yellow-50 border-yellow-400 text-yellow-800 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`;
@@ -53,6 +55,8 @@ const Alert = ({
       case 'success':
         return { name: 'CheckCircle', color: 'text-green-500' };
       case 'error':
+      case 'failed':
+      case 'delete':
         return { name: 'XCircle', color: 'text-red-500' };
       case 'warning':
         return { name: 'AlertTriangle', color: 'text-yellow-500' };
@@ -67,6 +71,8 @@ const Alert = ({
       case 'success':
         return 'bg-green-400';
       case 'error':
+      case 'failed':
+      case 'delete':
         return 'bg-red-400';
       case 'warning':
         return 'bg-yellow-400';
@@ -96,14 +102,17 @@ const Alert = ({
             </p>
           )}
         </div>
-        <div className="ml-4 flex-shrink-0">
-          <button
-            onClick={handleClose}
-            className="inline-flex text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors"
-          >
-            <Icon name="X" size={16} />
-          </button>
-        </div>
+        {/* Hide close button for error/failed/delete alerts */}
+        {!(type === 'error' || type === 'failed' || type === 'delete') && (
+          <div className="ml-4 flex-shrink-0">
+            <button
+              onClick={handleClose}
+              className="inline-flex text-gray-400 hover:text-gray-600 focus:outline-none focus:text-gray-600 transition-colors"
+            >
+              <Icon name="X" size={16} />
+            </button>
+          </div>
+        )}
       </div>
       
       {/* Progress bar for auto-close */}
