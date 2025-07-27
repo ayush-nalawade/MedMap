@@ -9,7 +9,7 @@ const Header = ({ onMenuToggle }) => {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { user, logout } = useUser();
 
-  console.log('Header user data:', user?.user?.name);
+  console.log('Header user data:', user);
   const getPageTitle = () => {
     const path = location.pathname;
     switch (path) {

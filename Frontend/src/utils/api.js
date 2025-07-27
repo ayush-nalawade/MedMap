@@ -29,6 +29,9 @@ class ApiService {
     const token = this.getAuthToken();
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
+      
+    } else {
+      console.log('No token found in localStorage');
     }
     
     return headers;
