@@ -1,7 +1,6 @@
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://medmap-backend.onrender.com/api'
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://med-iplfz0oui-ayushnalawade2233-5256s-projects.vercel.app/api'
   : 'http://localhost:5000/api';
-
 class ApiService {
   constructor() {
     this.baseURL = API_BASE_URL;
