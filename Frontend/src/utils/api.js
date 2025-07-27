@@ -1,4 +1,6 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = process.env.NODE_ENV === 'production' 
+  ? 'https://medmap-doctor-arg54zsn7-ayushnalawade2233-5256s-projects.vercel.app/api'
+  : 'http://localhost:5000/api';
 
 class ApiService {
   constructor() {
@@ -29,9 +31,6 @@ class ApiService {
     const token = this.getAuthToken();
     if (token) {
       headers['Authorization'] = `Bearer ${token}`;
-      
-    } else {
-      console.log('No token found in localStorage');
     }
     
     return headers;
