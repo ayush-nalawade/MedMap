@@ -6,9 +6,23 @@ const connectDB = require('./config');
 dotenv.config();
 connectDB();
 
+const allowedOrigins = [
+    'https://med-map-8msp.vercel.app', // your frontend Vercel URL
+    'http://localhost:3000',           // for local development (optional)
+  ];
+
 const app = express();
-app.use(cors());
+// app.use(cors());
 app.use(express.json());
+app.use(cors({
+    origin: allowedOrigins,
+    credentials: true, // if you use cookies/auth
+  }));
+
+app.options('*', cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
