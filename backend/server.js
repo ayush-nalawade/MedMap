@@ -17,5 +17,4 @@ app.use('/api/consultants', require('./routes/consultant'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/test', require('./routes/test'));
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app; 
