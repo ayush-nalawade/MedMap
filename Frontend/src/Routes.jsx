@@ -1,15 +1,15 @@
 import React from "react";
 import { BrowserRouter, Routes as RouterRoutes, Route } from "react-router-dom";
-import ScrollToTop from "components/ScrollToTop";
-import ErrorBoundary from "components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
+import ErrorBoundary from "./components/ErrorBoundary";
 // Add your imports here
-import LoginScreen from "pages/login-screen";
-import RegisterScreen from "pages/register-screen";
-import ConsultantProfile from "pages/consultant-profile";
-import Dashboard from "pages/dashboard";
-import ConsultantManagement from "pages/consultant-management";
-import DoctorManagement from "pages/doctor-management";
-import NotFound from "pages/NotFound";
+import LoginScreen from "./pages/login-screen";
+import RegisterScreen from "./pages/register-screen";
+import ConsultantProfile from "./pages/consultant-profile";
+import Dashboard from "./pages/dashboard";
+import ConsultantManagement from "./pages/consultant-management";
+import DoctorManagement from "./pages/doctor-management";
+import NotFound from "./pages/NotFound";
 
 const Routes = () => {
   return (
