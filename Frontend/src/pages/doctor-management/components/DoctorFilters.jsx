@@ -25,16 +25,54 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
   ];
 
   const subLocationOptions = [
-    { value: '', label: 'All Sub-locations' },
-    { value: 'charkop', label: 'Charkop' },
+    { value: 'NA', label: 'NA' },
+    { value: 'eksar', label: 'Eksar' },
+    { value: 'sv-road', label: 'S.V. Road' },
+    { value: 'mg-road', label: 'M.G. Road' },
+    { value: 'link-road', label: 'Link Road' },
+    { value: 'chikoowadi', label: 'Chikoowadi' },
     { value: 'bangur-nagar', label: 'Bangur Nagar' },
+    { value: 'teen dongri', label: 'Teen dongri' },
+    { value: 'malvani', label: 'Malvani' },
+    { value: 'ram-mandir', label: 'Ram Mandir' },
+    { value: 'jawahar-nagar', label: 'Jawahar Nagar' },
+    { value: 'bhagat-singh-nagar-1', label: 'Bhagat Singh Nagar No. 1' },
+    { value: 'bhagat-singh-nagar-2', label: 'Bhagat Singh Nagar No. 2' },
     { value: 'motilal-nagar', label: 'Motilal Nagar' },
-    { value: 'mg-road', label: 'M G Road' },
-    { value: 'sv-road', label: 'S V Road' },
-    { value: 'teen-dongari', label: 'Teen Dongari' },
+    { value: 'best-colony', label: 'Best Colony' },
+    { value: 'evershine-nagar', label: 'Evershine Nagar' },
+    { value: 'laljipada', label: 'Laljipada' },
+    { value: 'marve-road', label: 'Marve Road' },
+    { value: 'sai-nagar', label: 'Sai Nagar' },
+    { value: 'patel-nagar', label: 'Patel Nagar' },
+    { value: 'shantilal-modi-road', label: 'Shantilal Modi Road' },
+    { value: 'irani-wadi', label: 'Irani Wadi' },
+    { value: 'gorai-1', label: 'Gorai 1' },
+    { value: 'gorai-2', label: 'Gorai 2' },
+    { value: 'mhb-colony', label: 'MHB Colony' },
+    { value: 'charkop-sector-8', label: 'Charkop Sector 8' },
+    { value: 'charkop-sector-9', label: 'Charkop Sector 9' },
+    { value: 'somwari-bazar', label: 'Somwari Bazar' },
+    { value: 'prem-nagar', label: 'Prem Nagar' },
+    { value: 'liberty-garden', label: 'Liberty Garden' },
     { value: 'behram-baug', label: 'Behram Baug' },
-    { value: 'malvani', label: 'Malvani' }
+    { value: 'pandurang-wadi', label: 'Pandurang Wadi' },
+    { value: 'santosh-nagar', label: 'Santosh Nagar' },
+    { value: 'quarters-colony', label: 'Quarters Colony' },
+    { value: 'bachchani-nagar', label: 'Bachchani Nagar' },
+    { value: 'malad-east', label: 'Malad East' },
+    { value: 'borivali-east', label: 'Borivali East' },
+    { value: 'goregaon-east', label: 'Goregaon East' },
+    { value: 'kandivali-east', label: 'Kandivali East' },
+    { value: 'thakur-village', label: 'Thakur Village' },
+    { value: 'thakur-complex', label: 'Thakur Complex' },
+    { value: 'dahisar', label: 'Dahisar' },
+    { value: 'dahisar-east', label: 'Dahisar East' },
+    { value: 'anand-nagar', label: 'Anand Nagar' },
+    { value: 'bhadran-nagar', label: 'Bhadran Nagar' },
+    { value: 'ganesh-nagar', label: 'Ganesh Nagar' },
   ];
+  
 
   const specializationOptions = [
     { value: 'cardiologist', label: 'Cardiologist' },
@@ -153,6 +191,8 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
             options={locationOptions}
             value={selectedLocation}
             onChange={setSelectedLocation}
+            multiple
+            searchable
             clearable
           />
         </div>
@@ -164,6 +204,8 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
             options={subLocationOptions}
             value={selectedSubLocation}
             onChange={setSelectedSubLocation}
+            multiple
+            searchable
             clearable
           />
         </div>
