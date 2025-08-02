@@ -25,7 +25,7 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
   ];
 
   const subLocationOptions = [
-    { value: 'NA', label: 'NA' },
+    { value: '', label: 'All Sub-locations' },
     { value: 'eksar', label: 'Eksar' },
     { value: 'sv-road', label: 'S.V. Road' },
     { value: 'mg-road', label: 'M.G. Road' },
