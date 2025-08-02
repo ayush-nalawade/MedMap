@@ -29,6 +29,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/doctors', require('./routes/doctor'));
 app.use('/api/consultants', require('./routes/consultant'));
 app.use('/api/dashboard', require('./routes/dashboard'));
+app.use('/api/activities', require('./routes/activities'));
 app.use('/api/test', require('./routes/test'));
 
 module.exports = app; 

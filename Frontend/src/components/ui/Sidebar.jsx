@@ -27,6 +27,12 @@ const Sidebar = ({ isOpen, onClose }) => {
       path: '/consultant-management',
       icon: 'Users',
       description: 'Manage consultant relationships'
+    },
+    {
+      label: 'Activity',
+      path: '/activity',
+      icon: 'Calendar',
+      description: 'Track doctor activities'
     }
   ];
 

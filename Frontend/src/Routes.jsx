@@ -9,6 +9,7 @@ import ConsultantProfile from "./pages/consultant-profile";
 import Dashboard from "./pages/dashboard";
 import ConsultantManagement from "./pages/consultant-management";
 import DoctorManagement from "./pages/doctor-management";
+import Activity from "./pages/activity";
 import NotFound from "./pages/NotFound";
 
 const Routes = () => {
@@ -25,6 +26,7 @@ const Routes = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/consultant-management" element={<ConsultantManagement />} />
         <Route path="/doctor-management" element={<DoctorManagement />} />
+        <Route path="/activity" element={<Activity />} />
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

@@ -274,6 +274,54 @@ class ApiService {
   async bulkExportConsultants(consultantIds) {
     return this.post('/consultants/bulk-export', { consultantIds });
   }
+
+  // Activity endpoints
+  async getActivities(params = {}) {
+    // Handle array parameters properly
+    const queryParams = new URLSearchParams();
+    
+    Object.keys(params).forEach(key => {
+      if (Array.isArray(params[key])) {
+        // For arrays, add each value with the same key
+        params[key].forEach(value => {
+          queryParams.append(key, value);
+        });
+      } else {
+        queryParams.append(key, params[key]);
+      }
+    });
+    
+    const queryString = queryParams.toString();
+    const response = await this.get(`/activities?${queryString}`);
+    return response;
+  }
+
+  async getActivityStats() {
+    return this.get('/activities/stats');
+  }
+
+  async getActivityById(id) {
+    const response = await this.get(`/activities/${id}`);
+    return response;
+  }
+
+  async createActivity(activityData) {
+    const response = await this.post('/activities', activityData);
+    return response;
+  }
+
+  async updateActivity(id, activityData) {
+    const response = await this.put(`/activities/${id}`, activityData);
+    return response;
+  }
+
+  async deleteActivity(id) {
+    return this.delete(`/activities/${id}`);
+  }
+
+  async bulkDeleteActivities(activityIds) {
+    return this.post('/activities/bulk-delete', { activityIds });
+  }
 }
 
 const api = new ApiService();
