@@ -32,4 +32,12 @@ app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/activities', require('./routes/activities'));
 app.use('/api/test', require('./routes/test'));
 
-module.exports = app; 
+module.exports = app;
+
+// Start server for local development
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+} 
