@@ -42,7 +42,9 @@ exports.getDoctors = async (req, res) => {
       sortOrder = 'asc',
       subLocation,
       phoneNumber,
-      specializationType
+      specializationType,
+      specializations,
+      specializationTypes
     } = req.query;
     
     // Base query - only show doctors belonging to the authenticated user
@@ -50,10 +52,25 @@ exports.getDoctors = async (req, res) => {
     
     // Add filters
     if (location) query.location = location;
-    if (specialization) query.specialization = specialization;
-    if (specializationType) query.specializationType = specializationType;
     if (subLocation) query.subLocation = { $regex: subLocation, $options: 'i' };
     if (phoneNumber) query.phoneNumber = { $regex: phoneNumber, $options: 'i' };
+    
+    // Handle specialization filters (support both single and multiple)
+    if (specializations) {
+      const specArray = Array.isArray(specializations) ? specializations : [specializations];
+      query.specialization = { $in: specArray };
+    } else if (specialization) {
+      query.specialization = specialization;
+    }
+    
+    // Handle specialization type filters (support both single and multiple)
+    if (specializationTypes) {
+      const typeArray = Array.isArray(specializationTypes) ? specializationTypes : [specializationTypes];
+      query.specializationType = { $in: typeArray };
+    } else if (specializationType) {
+      query.specializationType = specializationType;
+    }
+    
     if (search) {
       query.$or = [
         { name: { $regex: search, $options: 'i' } },

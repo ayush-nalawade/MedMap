@@ -191,7 +191,6 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
             options={locationOptions}
             value={selectedLocation}
             onChange={setSelectedLocation}
-            multiple
             searchable
             clearable
           />
@@ -204,7 +203,6 @@ const DoctorFilters = ({ onFiltersChange, onClearFilters }) => {
             options={subLocationOptions}
             value={selectedSubLocation}
             onChange={setSelectedSubLocation}
-            multiple
             searchable
             clearable
           />

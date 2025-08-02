@@ -170,7 +170,21 @@ class ApiService {
 
   // Doctor endpoints
   async getDoctors(params = {}) {
-    const queryString = new URLSearchParams(params).toString();
+    // Handle array parameters properly
+    const queryParams = new URLSearchParams();
+    
+    Object.keys(params).forEach(key => {
+      if (Array.isArray(params[key])) {
+        // For arrays, add each value with the same key
+        params[key].forEach(value => {
+          queryParams.append(key, value);
+        });
+      } else {
+        queryParams.append(key, params[key]);
+      }
+    });
+    
+    const queryString = queryParams.toString();
     const response = await this.get(`/doctors?${queryString}`);
     return response;
   }

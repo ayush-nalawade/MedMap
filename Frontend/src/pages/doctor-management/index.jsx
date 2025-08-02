@@ -61,23 +61,38 @@ const DoctorManagement = () => {
   const fetchDoctors = async () => {
     try {
       setLoading(true);
-      console.log('Fetching doctors with params:', {
-        page: currentPage,
-        limit: itemsPerPage,
-        sortBy: sortConfig.key,
-        sortOrder: sortConfig.direction,
-        ...filters
-      });
       
-      const params = {
+      // Prepare backend filters
+      const backendFilters = {
         page: currentPage,
         limit: itemsPerPage,
         sortBy: sortConfig.key,
         sortOrder: sortConfig.direction,
-        ...filters
+        search: filters.search,
+        location: filters.location,
+        subLocation: filters.subLocation
       };
 
-      const response = await api.getDoctors(params);
+      // Add specialization filters
+      if (filters.specializations.length > 0) {
+        backendFilters.specializations = filters.specializations;
+      }
+
+      // Add specialization type filters
+      if (filters.specializationTypes.length > 0) {
+        backendFilters.specializationTypes = filters.specializationTypes;
+      }
+
+      // Remove undefined values
+      Object.keys(backendFilters).forEach(key => {
+        if (backendFilters[key] === undefined || backendFilters[key] === '') {
+          delete backendFilters[key];
+        }
+      });
+
+      console.log('Fetching doctors with params:', backendFilters);
+      
+      const response = await api.getDoctors(backendFilters);
       console.log('Doctors response:', response);
       
       setDoctors(response.doctors);
@@ -104,36 +119,10 @@ const DoctorManagement = () => {
   const processedDoctors = useMemo(() => {
     let result = [...doctors];
 
-    // Apply filters
-    if (filters.search) {
-      result = result.filter(doctor =>
-        doctor.name.toLowerCase().includes(filters.search.toLowerCase())
-      );
-    }
-
-    if (filters.location) {
-      result = result.filter(doctor => doctor.location === filters.location);
-    }
-
-    if (filters.subLocation) {
-      result = result.filter(doctor => doctor.subLocation === filters.subLocation);
-    }
-
-    if (filters.specializations.length > 0) {
-      result = result.filter(doctor =>
-        filters.specializations.includes(doctor.specialization)
-      );
-    }
-
-    if (filters.specializationTypes.length > 0) {
-      result = result.filter(doctor =>
-        filters.specializationTypes.includes(doctor.specializationType)
-      );
-    }
-
+    // Apply frontend-only filters (hospitals array filtering)
     if (filters.hospitals.length > 0) {
       result = result.filter(doctor =>
-        doctor.preferredHospitals.some(hospital =>
+        doctor.preferredHospitals && doctor.preferredHospitals.some(hospital =>
           filters.hospitals.includes(hospital)
         )
       );
@@ -152,7 +141,7 @@ const DoctorManagement = () => {
     });
 
     return result;
-  }, [doctors, filters, sortConfig]);
+  }, [doctors, filters.hospitals, sortConfig]);
 
   const handleFiltersChange = (newFilters) => {
     setFilters(newFilters);
