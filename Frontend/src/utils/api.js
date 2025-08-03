@@ -2,8 +2,11 @@
 console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('VITE_NODE_ENV:', import.meta.env.MODE);
 
-// Temporarily force local backend for testing
-const API_BASE_URL = 'http://localhost:5000/api';
+
+const API_BASE_URL = process.env.NODE_ENV === 'production'
+  ? 'https://med-iplfz0oui-ayushnalawade2233-5256s-projects.vercel.app/api'
+  : 'http://localhost:5000/api';
+
 
 console.log('API_BASE_URL:', API_BASE_URL);
 class ApiService {
