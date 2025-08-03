@@ -9,6 +9,7 @@ connectDB();
 const allowedOrigins = [
     'https://med-map-8msp.vercel.app', // your frontend Vercel URL
     'http://localhost:3000',           // for local development (optional)
+    'http://localhost:4028',           // for local frontend development
   ];
 
 const app = express();
