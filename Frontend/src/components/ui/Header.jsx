@@ -69,7 +69,7 @@ const Header = ({ onMenuToggle }) => {
               <Icon name="User" size={16} color="white" />
             </div>
             <span className="hidden md:block text-sm font-medium text-text-primary">
-              {user?.user?.name || 'User'}
+              {user?.name || 'User'}
             </span>
             <Icon 
               name="ChevronDown" 
@@ -87,8 +87,8 @@ const Header = ({ onMenuToggle }) => {
               />
               <div className="absolute right-0 top-full mt-2 w-48 bg-popover border border-border rounded-lg shadow-modal-shadow z-1200">
                 <div className="p-3 border-b border-border">
-                  <p className="text-sm font-medium text-text-primary">{user?.user?.name || 'User'}</p>
-                  <p className="text-xs text-text-secondary">{user?.user?.email || 'user@example.com'}</p>
+                  <p className="text-sm font-medium text-text-primary">{user?.name || 'User'}</p>
+                  <p className="text-xs text-text-secondary">{user?.email || 'user@example.com'}</p>
                 </div>
                 <div className="py-2">
                   <button className="w-full px-3 py-2 text-left text-sm text-text-primary hover:bg-muted transition-colors duration-150 flex items-center gap-2">

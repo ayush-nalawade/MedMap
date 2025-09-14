@@ -26,17 +26,30 @@ export const UserProvider = ({ children }) => {
     } else {
       setLoading(false);
     }
+
+    // Listen for token expiration events
+    const handleTokenExpiration = () => {
+      setUser(null);
+      setLoading(false);
+    };
+
+    window.addEventListener('tokenExpired', handleTokenExpiration);
+
+    return () => {
+      window.removeEventListener('tokenExpired', handleTokenExpiration);
+    };
   }, []);
 
   const fetchCurrentUser = async () => {
     try {
       console.log('Fetching current user...');
-      const userData = await api.getCurrentUser();
-      console.log('Current user data:', userData);
-      setUser(userData);
+      const response = await api.getCurrentUser();
+      console.log('Current user response:', response);
+      setUser(response.user);
     } catch (error) {
       console.error('Error fetching current user:', error);
-      // If token is invalid, clear it
+      // If token is invalid or expired, clear user state and token
+      setUser(null);
       localStorage.removeItem('token');
       api.setAuthToken(null);
     } finally {

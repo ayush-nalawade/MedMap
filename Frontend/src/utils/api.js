@@ -3,9 +3,7 @@ console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('VITE_NODE_ENV:', import.meta.env.MODE);
 
 
-const API_BASE_URL = process.env.NODE_ENV === 'production'
-  ? 'https://med-iplfz0oui-ayushnalawade2233-5256s-projects.vercel.app/api'
-  : 'http://localhost:5000/api';
+const API_BASE_URL = 'http://localhost:5001/api'
 
 
 console.log('API_BASE_URL:', API_BASE_URL);
@@ -29,6 +27,17 @@ class ApiService {
     localStorage.removeItem('token');
   }
 
+  // Check if token is expired
+  isTokenExpired(token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const currentTime = Date.now() / 1000;
+      return payload.exp < currentTime;
+    } catch (error) {
+      return true; // If we can't parse the token, consider it expired
+    }
+  }
+
   // Get headers for API requests
   getHeaders() {
     const headers = {
@@ -45,6 +54,15 @@ class ApiService {
 
   // Generic request method with enhanced error handling
   async request(endpoint, options = {}) {
+    // Check if token is expired before making request
+    const token = this.getAuthToken();
+    if (token && this.isTokenExpired(token)) {
+      this.removeAuthToken();
+      window.dispatchEvent(new CustomEvent('tokenExpired'));
+      window.location.href = '/login-screen';
+      throw new Error('Token has expired. Please login again.');
+    }
+
     const url = `${this.baseURL}${endpoint}`;
     const config = {
       headers: this.getHeaders(),
@@ -57,8 +75,10 @@ class ApiService {
       
       if (!response.ok) {
         if (response.status === 401) {
-          // Unauthorized - redirect to login
+          // Unauthorized - clear token and redirect to login
           this.removeAuthToken();
+          // Dispatch a custom event to notify UserContext about token expiration
+          window.dispatchEvent(new CustomEvent('tokenExpired'));
           window.location.href = '/login-screen';
           throw new Error('Unauthorized - Please login again');
         }
