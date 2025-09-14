@@ -3,7 +3,7 @@ console.log('NODE_ENV:', process.env.NODE_ENV);
 console.log('VITE_NODE_ENV:', import.meta.env.MODE);
 
 
-const API_BASE_URL = 'http://localhost:5001/api'
+const API_BASE_URL = 'https://med-map-8msp.vercel.app/api' || 'http://localhost:5001/api'
 
 
 console.log('API_BASE_URL:', API_BASE_URL);
